@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   layout "main"
 
+  before_action :confirm_logged_in, :except => [:index, :show]
+
   def index
   end
 
@@ -20,6 +22,7 @@ class PostsController < ApplicationController
     @post.numLikes = 0
     @post.numReplies = 0
     @post.subject_id = @subject.id;
+    @post.user_id = session[:user_id]
     if @post.save
       flash[:notice] = "Post created successfully."
       redirect_to(post_path(@post, :subject_id => @subject.id))

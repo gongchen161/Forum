@@ -1,4 +1,7 @@
 class SubjectsController < ApplicationController
+
+  before_action :confirm_logged_in, :except => [:index, :show]
+
   layout 'main'
 
   def index

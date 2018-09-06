@@ -5,12 +5,20 @@
         <meta name="description" content="Forum Home Page">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%= stylesheet_link_tag('style', :media => 'all') %>
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
         <title><%= @title %></title>
     </head>
 
     <body>
       <div id="header">
-        <h1>Forum</h1>
+        <h1><%= link_to("Forum", subjects_path) %></h1>
+        <% if session[:user_id] %>
+          <p>Hello <%= session[:first_name] %>
+            <%= link_to("Logout", users_logout_path) %>
+        <% else %>
+          <p><%= link_to("Log In", users_path, :class => 'action index') %>
+              <%= link_to("Register", new_user_path, :class => 'action new') %><p>
+        <% end %>
       </div>
 
       <div id="main">
@@ -23,7 +31,14 @@
       </div>
 
       <div id="footer">
-          Contact Information:
+
+          <div class="contact-info">
+              <a href="https://github.com/gongchen161" title="Github" target="_blank" ><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/gongchen68" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="https://twitter.com/gchen68" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="mailto:gong.chen161@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+          <p>&copy 2018 Gong Chen</p>
       </div>
     </body>
 </html>

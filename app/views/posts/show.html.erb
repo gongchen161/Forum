@@ -1,24 +1,27 @@
 <% @title =  "Viewing " + @post.title %>
-<%= @post.content %>
-<div id="container">
+
+<fieldset>
+<h1><%= @post.title %></h1>
+  <%= @post.content %> -- <%= @post.user.first_name %>
+</fieldset>
+  <div id="container">
   <% @post.replies.each do |p| %>
-    <div>
-      <%= p.content %>
-    </div>
-  <% end %>
+    <fieldset>
+      <%= p.content %> -- <%= p.user.first_name %>
+    </fieldset>
+<% end %>
 
   <div>
 
     <%= form_for(@reply, :url => replies_path(:post_id => @post.id)) do |f| %>
           <table>
             <tr>
-              <th><%= f.label(:content) %></th>
-              <td><%= f.text_field(:content) %></td>
+              <td><%= f.text_area(:content, :size=>"80x10", :placeholder=>"Add your reply") %></td>
             </tr>
           </table>
 
           <div class="form-buttons">
-            <%= f.submit("Create Reply") %>
+            <%= f.submit("Add Reply") %>
           </div>
     <% end %>
 

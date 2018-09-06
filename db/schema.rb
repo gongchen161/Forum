@@ -47,7 +47,8 @@ ActiveRecord::Schema.define(version: 2018_09_06_141445) do
     t.string "first_name", limit: 50
     t.string "last_name", limit: 50
     t.string "email", limit: 100, default: "", null: false
-    t.string "types", limit: 30
+    t.string "password_digest"
+    t.integer "level"
     t.integer "numThreads"
     t.integer "numLikes"
     t.datetime "created_at", null: false

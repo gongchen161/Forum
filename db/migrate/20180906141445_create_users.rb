@@ -5,7 +5,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string "first_name", :limit => 50
       t.string "last_name", :limit => 50
       t.string "email", :default => '', :null => false, :limit => 100
-      t.string "types", :limit => 30
+      t.string "password_digest"
+      t.integer "level"
       t.integer "numThreads"
       t.integer "numLikes"
 
