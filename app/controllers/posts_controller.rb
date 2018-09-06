@@ -25,6 +25,8 @@ class PostsController < ApplicationController
     @post.user_id = session[:user_id]
     if @post.save
       flash[:notice] = "Post created successfully."
+      @post.user.numThreads += 1
+      @post.user.save
       redirect_to(post_path(@post, :subject_id => @subject.id))
     else
       render('new')
@@ -35,6 +37,17 @@ class PostsController < ApplicationController
   end
 
   def delete
+    confirm_level
+    @post = Post.find(params[:id])
+  end
+
+  def destroy
+    confirm_level
+    @post = Post.find(params[:id])
+    @post.replies.destroy
+    @post.destroy
+    flash[:notice] = "Post '#{@post.title}' destroyed"
+    redirect_to("/")
   end
 
 private

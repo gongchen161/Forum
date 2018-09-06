@@ -1,0 +1,14 @@
+<% @page_title = "Delete Replies" %>
+
+<div>
+
+  <%= form_for(@reply, :method => 'delete') do |f| %>
+
+    <h2>Delete This Replies : <%= @reply.content %> ></h2>
+
+    <div class="form-buttons">
+      <%= f.submit("Delete Reply") %>
+    </div>
+
+  <% end %>
+</div>

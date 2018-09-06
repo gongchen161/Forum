@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def new
@@ -23,6 +24,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       session[:first_name] = @user.first_name
+      session[:level] = @user.level
       flash[:notice] = 'User created successfully.'
       redirect_to(subjects_path)
     else
@@ -42,6 +44,7 @@ class UsersController < ApplicationController
     if validUser
       session[:user_id] = validUser.id
       session[:first_name] = validUser.first_name
+      session[:level] = validUser.level
       flash[:notice] = "You are now logged in."
       redirect_to("/")
     else
@@ -53,6 +56,7 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:first_name] = nil
+    session[:level] = nil
     flash[:notice] = 'Logged out'
     redirect_to("/")
   end

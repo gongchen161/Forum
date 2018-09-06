@@ -5,4 +5,11 @@ class ApplicationController < ActionController::Base
       redirect_to(users_path)
     end
   end
+
+  def confirm_level
+    if session[:level].to_i < 11
+      flash[:notice] = "Permission Denied"
+      redirect_to("/")
+    end
+  end
 end

@@ -17,9 +17,26 @@ class RepliesController < ApplicationController
 
    if @reply.save
       flash[:notice] = "Post created successfully."
+      @reply.user.numThreads += 1
+      @reply.user.save
       redirect_to(post_path(@post))
-    end
+  end
 
+  end
+
+  def delete
+    confirm_level
+    @reply = Reply.find(params[:id])
+  end
+
+
+  def destroy
+    confirm_level
+    @reply = Reply.find(params[:id])
+    @post = @reply.post
+    @reply.destroy
+    flash[:notice] = "Reply destroyed"
+    redirect_to(post_path(@post));
   end
 
 private

@@ -2,12 +2,18 @@
 
 <fieldset>
 <h1><%= @post.title %></h1>
-  <%= @post.content %> -- <%= @post.user.first_name %>
+  <%= @post.content %> -- <%= link_to(@post.user.first_name, user_path(@post.user)) %>
+  <% if session[:level].to_i > 10 %>
+  <%= link_to("Delete this post", delete_post_path(@post)) %>
+  <% end %>
 </fieldset>
   <div id="container">
   <% @post.replies.each do |p| %>
     <fieldset>
       <%= p.content %> -- <%= p.user.first_name %>
+      <% if session[:level].to_i > 10 %>
+      <%= link_to("Delete this reply", delete_reply_path(p)) %>
+      <% end %>
     </fieldset>
 <% end %>
 
