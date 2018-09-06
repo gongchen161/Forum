@@ -1,0 +1,26 @@
+<% @page_title = "New Post" %>
+<%= link_to("Back", subjects_path(:subject_id => @subject.id)) %>
+
+<div>
+  <h2>Create A Post</h2>
+
+  <%= form_for(@post, :url => posts_path(:subject_id => @subject.id)) do |f| %>
+
+        <table>
+          <tr>
+            <th><%= f.label(:title) %></th>
+            <td><%= f.text_field(:title) %></td>
+          </tr>
+          <tr>
+            <th><%= f.label(:content) %></th>
+            <td><%= f.text_field(:content) %></td>
+          </tr>
+        </table>
+
+
+        <div class="form-buttons">
+          <%= f.submit("Create Post") %>
+        </div>
+  <% end %>
+
+</div>

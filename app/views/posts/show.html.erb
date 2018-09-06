@@ -1,0 +1,27 @@
+<% @title =  "Viewing " + @post.title %>
+<%= @post.content %>
+<div id="container">
+  <% @post.replies.each do |p| %>
+    <div>
+      <%= p.content %>
+    </div>
+  <% end %>
+
+  <div>
+
+    <%= form_for(@reply, :url => replies_path(:post_id => @post.id)) do |f| %>
+          <table>
+            <tr>
+              <th><%= f.label(:content) %></th>
+              <td><%= f.text_field(:content) %></td>
+            </tr>
+          </table>
+
+          <div class="form-buttons">
+            <%= f.submit("Create Reply") %>
+          </div>
+    <% end %>
+
+  </div>
+
+</div>

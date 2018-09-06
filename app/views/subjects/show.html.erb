@@ -1,0 +1,15 @@
+<% @title =  "Viewing " + @subject.name %>
+
+
+<div id="container">
+  <% @subject.posts.each do |p| %>
+    <div>
+      <%= link_to(p.title, post_path(p), :class => 'action show') %>
+    </div>
+  <% end %>
+
+  <div>
+      <%= link_to("New Thread", new_post_path(:subject_id => @subject.id), :class => 'action new') %>
+  </div>
+
+</div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Forum Home Page">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%= stylesheet_link_tag('style', :media => 'all') %>
+        <title><%= @title %></title>
+    </head>
+
+    <body>
+      <div id="header">
+        <h1>Forum</h1>
+      </div>
+
+      <div id="main">
+        <% if !flash[:notice].blank? %>
+          <div>
+            <%= flash[:notice] %>
+          </div>
+          <% end %>
+        <%= yield %>
+      </div>
+
+      <div id="footer">
+          Contact Information:
+      </div>
+    </body>
+</html>

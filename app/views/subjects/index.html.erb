@@ -1,0 +1,16 @@
+<% @title = "Forum Home" %>
+
+<h1>Welcome to the Forum Home Page</h1>
+
+<div id="container">
+  <% @subjects.each do |subject| %>
+    <div>
+      <%= link_to(subject.name + " " + subject.id.to_s, subject_path(subject), :class => 'action show') %>
+    </div>
+  <% end %>
+
+  <div>
+      <%= link_to("New Subject", new_subject_path, :class => 'action new') %>
+  </div>
+
+</div>
