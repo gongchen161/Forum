@@ -34,9 +34,21 @@ class SubjectsController < ApplicationController
   end
 
   def delete
+    confirm_level
+    @subject = Subject.find(params[:id])
   end
 
   def destroy
+    confirm_level
+    @subject = Subject.find(params[:id])
+    @subject.posts.each {|post|
+      post.replies.each { |reply| reply.destroy }
+      post.destroy
+    }
+    @subject.destroy
+
+    flash[:notice] = "Subject '#{@subject.name}' destroyed"
+    redirect_to("/")
   end
 
 private

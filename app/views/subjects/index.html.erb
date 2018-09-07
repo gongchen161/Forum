@@ -10,6 +10,9 @@
     <% @subjects.each do |subject| %>
       <li>
         <h2><%= link_to(subject.name, subject_path(subject), :class => 'action show') %>
+          <% if session[:level].to_i > 10 %>
+          <%= link_to("Delete this Subject", delete_subject_path(subject)) %>
+          <% end %>
         </h2>
       </li>
     <% end %>

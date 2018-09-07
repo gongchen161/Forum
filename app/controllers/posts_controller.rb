@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def destroy
     confirm_level
     @post = Post.find(params[:id])
-    @post.replies.destroy
+    @post.replies.each { |reply| reply.destroy }
     @post.destroy
     flash[:notice] = "Post '#{@post.title}' destroyed"
     redirect_to("/")
