@@ -28,7 +28,8 @@ class UsersController < ApplicationController
       flash[:notice] = 'User created successfully.'
       redirect_to(subjects_path)
     else
-      render('index')
+      flash[:notice] = @user.errors.full_messages
+      render('new')
     end
 
   end

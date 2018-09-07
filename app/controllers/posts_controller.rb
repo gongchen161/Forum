@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @subject = Subject.find(params[:subject_id])
     @reply = Reply.new(:post_id => @post.id)
   end
 
@@ -29,6 +30,7 @@ class PostsController < ApplicationController
       @post.user.save
       redirect_to(post_path(@post, :subject_id => @subject.id))
     else
+      flash[:notice] = @post.errors.full_messages
       render('new')
     end
   end
@@ -44,10 +46,11 @@ class PostsController < ApplicationController
   def destroy
     confirm_level
     @post = Post.find(params[:id])
+    @subject = @post.subject
     @post.replies.each { |reply| reply.destroy }
     @post.destroy
     flash[:notice] = "Post '#{@post.title}' destroyed"
-    redirect_to("/")
+    redirect_to(subject_path(@subject));
   end
 
 private

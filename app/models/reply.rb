@@ -3,4 +3,5 @@ class Reply < ApplicationRecord
   belongs_to :user, { :optional => true }
 
   scope :sorted, lambda { order("position ASC") }
+  validates :content, :presence => true
 end

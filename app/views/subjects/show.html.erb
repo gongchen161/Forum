@@ -1,5 +1,7 @@
 <% @title =  "Viewing " + @subject.name %>
 
+<%= link_to("Back to Forum Home", subjects_path) %>
+
 <h2><%= "Viewing Forum : " + @subject.name %></h2>
 <div>
     <%= link_to("New Thread", new_post_path(:subject_id => @subject.id), :class => 'action new') %>
@@ -9,7 +11,7 @@
   <ul>
     <% @subject.posts.each do |p| %>
       <li>
-        <h3><%= link_to(p.title, post_path(p), :class => 'action show') %><h3>
+        <h3><%= link_to(p.title, post_path(p, :subject_id => @subject.id), :class => 'action show') %><h3>
       </li>
     <% end %>
   </ul>

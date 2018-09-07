@@ -9,24 +9,27 @@ class RepliesController < ApplicationController
   end
 
   def create
-   @post = Post.find(params[:post_id])
-   @reply = Reply.new(replyParams)
-   @reply.numLikes = 0;
-   @reply.post_id = @post.id;
-   @reply.user_id = session[:user_id]
+    @subject = Subject.find(params[:subject_id])
+    @post = Post.find(params[:post_id])
+    @reply = Reply.new(replyParams)
+    @reply.numLikes = 0;
+    @reply.post_id = @post.id;
+    @reply.user_id = session[:user_id]
 
-   if @reply.save
+    if @reply.save
       flash[:notice] = "Post created successfully."
       @reply.user.numThreads += 1
       @reply.user.save
-      redirect_to(post_path(@post))
-  end
-
+    else
+      flash[:notice] = @reply.errors.full_messages
+    end
+    redirect_to(post_path(@post, :subject_id => @subject.id))
   end
 
   def delete
     confirm_level
     @reply = Reply.find(params[:id])
+    @subject = Subject.find(params[:subject_id])
   end
 
 
@@ -34,9 +37,10 @@ class RepliesController < ApplicationController
     confirm_level
     @reply = Reply.find(params[:id])
     @post = @reply.post
+    @subject = @post.subject
     @reply.destroy
     flash[:notice] = "Reply destroyed"
-    redirect_to(post_path(@post));
+    redirect_to(post_path(@post, :subject_id => @subject.id))
   end
 
 private

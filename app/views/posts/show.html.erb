@@ -1,10 +1,12 @@
 <% @title =  "Viewing " + @post.title %>
 
+<%= link_to("Back to Forum " + @subject.name, subject_path(@subject.id)) %>
+
 <fieldset>
 <h1><%= @post.title %></h1>
   <%= @post.content %> -- <%= link_to(@post.user.first_name, user_path(@post.user)) %>
   <% if session[:level].to_i > 10 %>
-  <%= link_to("Delete this post", delete_post_path(@post)) %>
+  <%= link_to("Delete this post", delete_post_path(@post, :subject_id => params[:subject_id])) %>
   <% end %>
 </fieldset>
   <div id="container">
@@ -12,14 +14,14 @@
     <fieldset>
       <%= p.content %> -- <%= p.user.first_name %>
       <% if session[:level].to_i > 10 %>
-      <%= link_to("Delete this reply", delete_reply_path(p)) %>
+      <%= link_to("Delete this reply", delete_reply_path(p, :subject_id => params[:subject_id])) %>
       <% end %>
     </fieldset>
 <% end %>
 
   <div>
 
-    <%= form_for(@reply, :url => replies_path(:post_id => @post.id)) do |f| %>
+    <%= form_for(@reply, :url => replies_path(:post_id => @post.id, :subject_id => params[:subject_id])) do |f| %>
           <table>
             <tr>
               <td><%= f.text_area(:content, :size=>"80x10", :placeholder=>"Add your reply") %></td>

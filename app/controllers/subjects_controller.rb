@@ -23,6 +23,7 @@ class SubjectsController < ApplicationController
       flash[:notice] = "Subject created successfully"
       redirect_to(subjects_path)
     else
+      flash.now[:notice] = @subject.errors.full_messages
       render('new')
     end
   end

@@ -4,4 +4,6 @@ class Post < ApplicationRecord
   has_many :replies
 
   scope :sorted, lambda { order("position ASC") }
+  validates :title, :presence => true
+  validates :content, :presence => true
 end
