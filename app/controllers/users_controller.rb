@@ -21,7 +21,10 @@ class UsersController < ApplicationController
     @user.numThreads = 0
     @user.numLikes = 0
 
-    if @user.save
+    puts params[:password]
+    puts params[:confirm_password]
+
+    if @user.save 
       session[:user_id] = @user.id
       session[:first_name] = @user.first_name
       session[:level] = @user.level
@@ -65,6 +68,6 @@ class UsersController < ApplicationController
   private
 
  def userParams
-   params.require(:user).permit(:first_name, :last_name, :email, :password)
+   params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
  end
 end

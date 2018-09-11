@@ -14,10 +14,31 @@
         <th><%= f.label(:email) %></th>
         <td><%= f.text_field(:email) %></td>
         </tr>
+
         <tr>
+        <th><%= f.label(:password) %></th>
+        <tD><%= f.password_field :password %></tD>
+        </tr>
+
+        <tr>
+        <th><%= f.label(:password_confirmation) %></th>
+        <tD><%= f.password_field :password_confirmation %></tD>
+        </tr>
+    
+        
+
+        
+        <!----<tr>
         <th><%= f.label(:password) %></th>
         <td><%= f.password_field(:password) %></td>
         </tr>
+
+        <tr>
+        <th><%= f.label(:confirm_password) %></th>
+        <td><%= f.password_field(:confirm_password) %></td>
+        </tr>
+        --->
+
       </table>
 
 

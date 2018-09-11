@@ -28,3 +28,18 @@ body {
   padding: 10px;
 	background-color: white;
 }
+
+
+#footer a {
+  color: black;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+
+#footer a:hover {
+  background-color: #ffcc66;
+  color: white;
+}

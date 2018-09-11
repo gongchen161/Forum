@@ -13,7 +13,7 @@
       <div id="header">
         <h1><%= link_to("Forum", subjects_path) %></h1>
         <% if session[:user_id] %>
-          <p>Hello <%= session[:first_name] %>
+          <p>Hello <%= link_to(session[:first_name], user_path(session[:user_id])) %>
             <%= link_to("Logout", users_logout_path) %>
         <% else %>
           <p><%= link_to("Log In", users_path, :class => 'action index') %>
